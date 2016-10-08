@@ -117,41 +117,117 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene():void {
-        var sky:egret.Bitmap = this.createBitmapByName("bg_jpg");
-        this.addChild(sky);
         var stageW:number = this.stage.stageWidth;
         var stageH:number = this.stage.stageHeight;
-        sky.width = stageW;
-        sky.height = stageH;
+
+
+        //scroll
+        this.scrollRect= new egret.Rectangle(0,0,stageW*5,this.stage.stageHeight);    //页面数修改处
+        this.cacheAsBitmap = true;
+        this.touchEnabled = true;
+        var starttouchpointX:number = 0;
+        var startstagepointX:number = 0;
+        var movedistance:number = 0;
+
+        this.addEventListener(egret.TouchEvent.TOUCH_BEGIN, startScroll, this);
+        this.addEventListener(egret.TouchEvent.TOUCH_END, stopScroll, this);
+        
+        function startScroll(e: egret.TouchEvent): void {
+           
+            if((this.scrollRect.x%stageW)!= 0) {
+                
+                this.scrollRect.x = startstagepointX;  //如果图片位置错误，返回上一个正确位置；
+
+            }
+
+
+            starttouchpointX = e.stageX;
+            startstagepointX = this.scrollRect.x;
+            this.addEventListener(egret.TouchEvent.TOUCH_MOVE, onScroll, this);
+
+        }
+
+
+        function onScroll(e: egret.TouchEvent): void {
+         
+            var rect: egret.Rectangle = this.scrollRect;
+            movedistance = starttouchpointX - e.stageX;
+            rect.x = (startstagepointX + movedistance);
+            this.scrollRect = rect;
+
+        }
+
+        function stopScroll(e: egret.TouchEvent): void {
+
+            var rect: egret.Rectangle = this.scrollRect;
+
+            if((movedistance>=(this.stage.stageWidth/3)) && startstagepointX!=stageW*4) {   //页面数修改处
+
+                rect.x = startstagepointX + stageW;
+                this.scrollRect = rect;
+                movedistance = 0;
+               
+            }else if((movedistance<=(-(this.stage.stageWidth/3))) && startstagepointX!=0) {
+
+                rect.x = startstagepointX - stageW;
+                this.scrollRect = rect;    
+                movedistance = 0;
+
+            } else {
+
+                movedistance = 0;
+                rect.x = startstagepointX;
+                this.scrollRect = rect;
+
+            }
+
+            this.stage.removeEventListener(egret.TouchEvent.TOUCH_MOVE,onScroll,this);
+
+            
+        }
+//scroll end
+
+//page 1
+        var page1 = new egret.DisplayObjectContainer();
+        this.addChild(page1);
+        page1.width = stageW;
+        page1.height = stageH;
+
+        var sky1:egret.Bitmap = this.createBitmapByName("newbg_jpg");
+        this.addChild(sky1);
+        sky1.width = stageW;
+        sky1.height = stageH;
 
         var topMask = new egret.Shape();
-        topMask.graphics.beginFill(0x000000, 0.5);
+        topMask.graphics.beginFill(0xffffff, 0.5);
         topMask.graphics.drawRect(0, 0, stageW, 172);
         topMask.graphics.endFill();
         topMask.y = 33;
         this.addChild(topMask);
 
-        var icon:egret.Bitmap = this.createBitmapByName("egret_icon_png");
+        var icon:egret.Bitmap = this.createBitmapByName("logo_png");
         this.addChild(icon);
+        icon.scaleX=0.16;
+        icon.scaleY=0.14;
         icon.x = 26;
         icon.y = 33;
 
         var line = new egret.Shape();
-        line.graphics.lineStyle(2,0xffffff);
+        line.graphics.lineStyle(2,0x000000);
         line.graphics.moveTo(0,0);
         line.graphics.lineTo(0,117);
         line.graphics.endFill();
-        line.x = 172;
+        line.x = 222;
         line.y = 61;
         this.addChild(line);
 
 
         var colorLabel = new egret.TextField();
-        colorLabel.textColor = 0xffffff;
+        colorLabel.textColor = 0x000000;
         colorLabel.width = stageW - 172;
         colorLabel.textAlign = "center";
-        colorLabel.text = "Hello Egret";
-        colorLabel.size = 24;
+        colorLabel.text = "Personal Profile";
+        colorLabel.size = 31;
         colorLabel.x = 172;
         colorLabel.y = 80;
         this.addChild(colorLabel);
@@ -161,11 +237,63 @@ class Main extends egret.DisplayObjectContainer {
         textfield.alpha = 0;
         textfield.width = stageW - 172;
         textfield.textAlign = egret.HorizontalAlign.CENTER;
-        textfield.size = 24;
-        textfield.textColor = 0xffffff;
+        textfield.size = 29;
+        textfield.textColor = 0x000000;
         textfield.x = 172;
         textfield.y = 135;
         this.textfield = textfield;
+
+        //page 1 end
+
+        //page 2
+        var page2 = new egret.DisplayObjectContainer();
+        this.addChild(page2);
+        page2.x=stageW;
+        page2.width = stageW;
+        page2.height = stageH;
+
+        var sky2:egret.Bitmap = this.createBitmapByName("newbg_jpg");
+        page2.addChild(sky2);
+        sky2.width = stageW;
+        sky2.height = stageH;
+
+        var page2pic1:egret.Bitmap=this.createBitmapByName("pic1_jpg");
+        page2.addChild(page2pic1);
+        page2pic1.x=this.stage.stageWidth/2;
+        page2pic1.y=this.stage.stageHeight/2;
+        page2pic1.anchorOffsetX = page2pic1.width/2;
+        page2pic1.anchorOffsetY = page2pic1.height/2;
+        page2pic1.scaleX=0.2;
+        page2pic1.scaleY=0.2;
+
+        var picmove:Function=function(){
+            var pictw=egret.Tween.get(page2pic1);
+            pictw.to({"rotation":10},100);
+            pictw.to({"rotation":-10},100);
+            pictw.to({"rotation":0},100);
+            pictw.wait(1500);
+            pictw.call(picmove,self);
+        }
+        picmove();
+
+        
+
+        //page 2 end
+
+        //page 3
+        var page3 = new egret.DisplayObjectContainer();
+        this.addChild(page3);
+        page3.x=stageW*2;
+        page3.width = stageW;
+        page3.height = stageH;
+
+        var sky3:egret.Bitmap = this.createBitmapByName("newbg_jpg");
+        page3.addChild(sky3);
+        sky3.width = stageW;
+        sky3.height = stageH;
+
+        //page 3 end
+
 
         //根据name关键字，异步获取一个json配置文件，name属性请参考resources/resource.json配置文件的内容。
         // Get asynchronously a json configuration file according to name keyword. As for the property of name please refer to the configuration file of resources/resource.json.
