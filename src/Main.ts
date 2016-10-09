@@ -220,7 +220,39 @@ class Main extends egret.DisplayObjectContainer {
         line.x = 222;
         line.y = 61;
         this.addChild(line);
+//左右滚动提示
+        var line2=new egret.Shape();
+        line2.graphics.lineStyle(10,0xffffff);
+        line2.graphics.moveTo(0,0);
+        line2.graphics.lineTo(-20,-50);
+        line2.graphics.endFill();
+        line2.x = 600;
+        line2.y = stageH/2;
+        this.addChild(line2);
 
+        var line3=new egret.Shape();
+        line3.graphics.lineStyle(10,0xffffff);
+        line3.graphics.moveTo(0,0);
+        line3.graphics.lineTo(-20,50);
+        line3.graphics.endFill();
+        line3.x = 600;
+        line3.y = stageH/2;
+        this.addChild(line3);
+
+        var change:Function=function(){
+            var tw2 = egret.Tween.get(line2);
+            tw2.to({"alpha": 1}, 500);
+            tw2.wait(1500);
+            tw2.to({"alpha": 0}, 500);
+            tw2.call(change, self);
+            var tw3 = egret.Tween.get(line3);
+            tw3.to({"alpha": 1}, 500);
+            tw3.wait(1500);
+            tw3.to({"alpha": 0}, 500);
+            tw3.call(change, self);
+        }
+        change();
+//左右滚动提示结束
 
         var colorLabel = new egret.TextField();
         colorLabel.textColor = 0x000000;
@@ -276,7 +308,37 @@ class Main extends egret.DisplayObjectContainer {
         }
         picmove();
 
-        
+        var line4=new egret.Shape();
+        line4.graphics.lineStyle(10,0xffffff);
+        line4.graphics.moveTo(0,0);
+        line4.graphics.lineTo(-20,-50);
+        line4.graphics.endFill();
+        line4.x = 600;
+        line4.y = stageH/2;
+        page2.addChild(line4);
+
+        var line5=new egret.Shape();
+        line5.graphics.lineStyle(10,0xffffff);
+        line5.graphics.moveTo(0,0);
+        line5.graphics.lineTo(-20,50);
+        line5.graphics.endFill();
+        line5.x = 600;
+        line5.y = stageH/2;
+        page2.addChild(line5);
+
+        var change2:Function=function(){
+            var tw2 = egret.Tween.get(line4);
+            tw2.to({"alpha": 1}, 500);
+            tw2.wait(1500);
+            tw2.to({"alpha": 0}, 500);
+            tw2.call(change2, self);
+            var tw3 = egret.Tween.get(line5);
+            tw3.to({"alpha": 1}, 500);
+            tw3.wait(1500);
+            tw3.to({"alpha": 0}, 500);
+            tw3.call(change2, self);
+        }
+        change2();
 
         //page 2 end
 
