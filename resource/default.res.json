@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,newbg_jpg,logo_png,pic1_jpg",
+			"keys": "bg_jpg,egret_icon_png,description_json,newbg_jpg,logo_png,pic1_jpg,Justin Hurwitz - Fletcher's Song In Club_mp3",
 			"name": "preload"
 		}
 	],
@@ -35,6 +35,11 @@
 			"url": "assets/pic1.jpg",
 			"type": "image",
 			"name": "pic1_jpg"
+		},
+		{
+			"url": "assets/Justin Hurwitz - Fletcher's Song In Club.mp3",
+			"type": "sound",
+			"name": "Justin Hurwitz - Fletcher's Song In Club_mp3"
 		}
 	]
 }

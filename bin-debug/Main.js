@@ -42,6 +42,17 @@ var Main = (function (_super) {
         //initiate Resource loading library
         RES.addEventListener(RES.ResourceEvent.CONFIG_COMPLETE, this.onConfigComplete, this);
         RES.loadConfig("resource/default.res.json", "resource/");
+        this.loadSound(); //music
+    };
+    //音乐函数
+    p.loadSound = function () {
+        var sound = this._sound = new egret.Sound();
+        ;
+        //sound 加载完成监听
+        sound.addEventListener(egret.Event.COMPLETE, function (e) {
+            this.init();
+        }, this);
+        sound.load("resource/assets/Justin Hurwitz - Fletcher's Song In Club_mp3");
     };
     /**
      * 配置文件加载完成,开始预加载preload资源组。
@@ -225,6 +236,29 @@ var Main = (function (_super) {
         textfield.x = 172;
         textfield.y = 135;
         this.textfield = textfield;
+        //循环播放音乐
+        var sound = RES.getRes("Justin Hurwitz - Fletcher's Song In Club_mp3");
+        var channel = sound.play(0, -1);
+        this.content = new egret.TextField();
+        this.content.text = "张天意的个人简介";
+        this.content.textColor = 0x000000;
+        this.content.bold = true;
+        this.content.stroke = 2;
+        this.content.strokeColor = 0xffffff;
+        this.content.y = 260;
+        this.content.x = 35;
+        this.content.size = 40;
+        this.addChild(this.content);
+        this.content1 = new egret.TextField();
+        this.content1.text = "毕业于北京市第九中学\n\n目前在北京工业大学完成本科学业\n\n最近疯狂迷恋爵士乐\n\n一如既往的冲天梯\n\nlost caslte正在努力的打伯爵\n\n梦想成为一流程序员 二流摄影师\n\n三流小主播";
+        this.content1.textColor = 0x000000;
+        this.content1.bold = true;
+        this.content1.stroke = 2;
+        this.content1.strokeColor = 0xffffff;
+        this.content1.y = 370;
+        this.content1.x = 35;
+        this.content1.size = 35;
+        this.addChild(this.content1);
         //page 1 end
         //page 2
         var page2 = new egret.DisplayObjectContainer();
@@ -274,7 +308,7 @@ var Main = (function (_super) {
             tw2.to({ "alpha": 1 }, 500);
             tw2.wait(1500);
             tw2.to({ "alpha": 0 }, 500);
-            tw2.call(change, self);
+            tw2.call(change2, self);
             var tw3 = egret.Tween.get(line5);
             tw3.to({ "alpha": 1 }, 500);
             tw3.wait(1500);
@@ -282,6 +316,35 @@ var Main = (function (_super) {
             tw3.call(change2, self);
         };
         change2();
+        var line6 = new egret.Shape();
+        line6.graphics.lineStyle(10, 0xffffff);
+        line6.graphics.moveTo(0, 0);
+        line6.graphics.lineTo(20, -50);
+        line6.graphics.endFill();
+        line6.x = 40;
+        line6.y = stageH / 2;
+        page2.addChild(line6);
+        var line7 = new egret.Shape();
+        line7.graphics.lineStyle(10, 0xffffff);
+        line7.graphics.moveTo(0, 0);
+        line7.graphics.lineTo(20, 50);
+        line7.graphics.endFill();
+        line7.x = 40;
+        line7.y = stageH / 2;
+        page2.addChild(line7);
+        var change3 = function () {
+            var tw2 = egret.Tween.get(line6);
+            tw2.to({ "alpha": 1 }, 500);
+            tw2.wait(1500);
+            tw2.to({ "alpha": 0 }, 500);
+            tw2.call(change2, self);
+            var tw3 = egret.Tween.get(line7);
+            tw3.to({ "alpha": 1 }, 500);
+            tw3.wait(1500);
+            tw3.to({ "alpha": 0 }, 500);
+            tw3.call(change3, self);
+        };
+        change3();
         //page 2 end
         //page 3
         var page3 = new egret.DisplayObjectContainer();
