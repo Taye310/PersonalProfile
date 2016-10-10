@@ -356,6 +356,65 @@ var Main = (function (_super) {
         page3.addChild(sky3);
         sky3.width = stageW;
         sky3.height = stageH;
+        this.content2 = new egret.TextField();
+        this.content2.text = "喜欢的电影和书籍";
+        this.content2.textColor = 0x000000;
+        this.content2.bold = true;
+        this.content2.stroke = 2;
+        this.content2.strokeColor = 0xffffff;
+        this.content2.y = 100;
+        this.content2.x = 160;
+        this.content2.size = 40;
+        page3.addChild(this.content2);
+        var changeHungergame = function () {
+            var Hgtw = egret.Tween.get(HungerGame);
+            Hgtw.to({ "alpha": 1 }, 500);
+            Hgtw.wait(2000);
+            Hgtw.to({ "alpha": 0 }, 500);
+            Hgtw.call(changeDaoshang, self);
+        };
+        var changeDaoshang = function () {
+            var Dstw = egret.Tween.get(Daoshang);
+            Dstw.to({ "alpha": 1 }, 500);
+            Dstw.wait(2000);
+            Dstw.to({ "alpha": 0 }, 500);
+            Dstw.call(changeShisi, self);
+        };
+        var changeShisi = function () {
+            var Sstw = egret.Tween.get(Shisi);
+            Sstw.to({ "alpha": 1 }, 500);
+            Sstw.wait(2000);
+            Sstw.to({ "alpha": 0 }, 500);
+            Sstw.call(changeHungergame, self);
+        };
+        var HungerGame = this.createBitmapByName("2_jpg");
+        page3.addChild(HungerGame);
+        HungerGame.scaleX = 0.5;
+        HungerGame.scaleY = 0.5;
+        HungerGame.anchorOffsetX = HungerGame.width / 2;
+        HungerGame.anchorOffsetY = HungerGame.height / 2;
+        HungerGame.x = this.stage.stageWidth / 2;
+        HungerGame.y = this.stage.stageHeight / 2;
+        HungerGame.alpha = 1;
+        var Daoshang = this.createBitmapByName("3_jpg");
+        page3.addChild(Daoshang);
+        Daoshang.scaleX = HungerGame.width / Daoshang.width * 0.5;
+        Daoshang.scaleY = HungerGame.width / Daoshang.width * 0.5;
+        Daoshang.anchorOffsetX = Daoshang.width / 2;
+        Daoshang.anchorOffsetY = Daoshang.height / 2;
+        Daoshang.x = this.stage.stageWidth / 2;
+        Daoshang.y = this.stage.stageHeight / 2;
+        Daoshang.alpha = 0;
+        var Shisi = this.createBitmapByName("4_jpg");
+        page3.addChild(Shisi);
+        Shisi.scaleX = HungerGame.width / Shisi.width * 0.5;
+        Shisi.scaleY = HungerGame.width / Shisi.width * 0.5;
+        Shisi.anchorOffsetX = Shisi.width / 2;
+        Shisi.anchorOffsetY = Shisi.height / 2;
+        Shisi.x = this.stage.stageWidth / 2;
+        Shisi.y = this.stage.stageHeight / 2;
+        Shisi.alpha = 0;
+        changeHungergame();
         //page 3 end
         //根据name关键字，异步获取一个json配置文件，name属性请参考resources/resource.json配置文件的内容。
         // Get asynchronously a json configuration file according to name keyword. As for the property of name please refer to the configuration file of resources/resource.json.
