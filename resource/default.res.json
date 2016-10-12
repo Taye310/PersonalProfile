@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "bg_jpg,egret_icon_png,description_json,newbg_jpg,logo_png,pic1_jpg,Justin Hurwitz - Fletcher's Song In Club_mp3,2_jpg,3_jpg,4_jpg",
+			"keys": "bg_jpg,egret_icon_png,description_json,newbg_jpg,logo_png,pic1_jpg,Justin Hurwitz - Fletcher's Song In Club_mp3,2_jpg,3_jpg,4_jpg,bloodborne_jpg,darksouls_jpg",
 			"name": "preload"
 		}
 	],
@@ -42,19 +42,29 @@
 			"name": "Justin Hurwitz - Fletcher's Song In Club_mp3"
 		},
 		{
-			"name": "2_jpg",
+			"url": "assets/2.jpg",
 			"type": "image",
-			"url": "assets/2.jpg"
+			"name": "2_jpg"
 		},
 		{
-			"name": "3_jpg",
+			"url": "assets/3.jpg",
 			"type": "image",
-			"url": "assets/3.jpg"
+			"name": "3_jpg"
 		},
 		{
-			"name": "4_jpg",
+			"url": "assets/4.jpg",
 			"type": "image",
-			"url": "assets/4.jpg"
+			"name": "4_jpg"
+		},
+		{
+			"url": "assets/bloodborne.jpg",
+			"type": "image",
+			"name": "bloodborne_jpg"
+		},
+		{
+			"url": "assets/darksouls.jpg",
+			"type": "image",
+			"name": "darksouls_jpg"
 		}
 	]
 }

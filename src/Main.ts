@@ -133,9 +133,6 @@ class Main extends egret.DisplayObjectContainer {
     private content2:egret.TextField;
     private content3:egret.TextField;
     private content4:egret.TextField;
-    private content5:egret.TextField;
-    private content6:egret.TextField;
-    private content7:egret.TextField;
 
     /**
      * 创建游戏场景
@@ -337,6 +334,17 @@ class Main extends egret.DisplayObjectContainer {
         page2.width = stageW;
         page2.height = stageH;
 
+        this.content4 = new egret.TextField();
+        this.content4.text = "喜欢的游戏"; 
+        this.content4.textColor = 0x000000;
+        this.content4.bold=true;
+        this.content4.stroke = 2;
+        this.content4.strokeColor = 0xffffff;
+        this.content4.y = 900;
+        this.content4.x = 160;
+        this.content4.size = 40; 
+        page2.addChild(this.content4);
+
         var sky2:egret.Bitmap = this.createBitmapByName("newbg_jpg");
         page2.addChild(sky2);
         sky2.width = stageW;
@@ -344,12 +352,30 @@ class Main extends egret.DisplayObjectContainer {
 
         var page2pic1:egret.Bitmap=this.createBitmapByName("pic1_jpg");
         page2.addChild(page2pic1);
-        page2pic1.x=this.stage.stageWidth/2;
-        page2pic1.y=this.stage.stageHeight/2;
+        page2pic1.x=this.stage.stageWidth/4;
+        page2pic1.y=this.stage.stageHeight/4;
         page2pic1.anchorOffsetX = page2pic1.width/2;
         page2pic1.anchorOffsetY = page2pic1.height/2;
-        page2pic1.scaleX=0.2;
-        page2pic1.scaleY=0.2;
+        page2pic1.scaleX=0.4;
+        page2pic1.scaleY=0.4 ;
+
+        var page2pic2:egret.Bitmap=this.createBitmapByName("bloodborne_jpg");
+        page2.addChild(page2pic2);
+        page2pic2.x=this.stage.stageWidth*3/4;
+        page2pic2.y=this.stage.stageHeight/4;
+        page2pic2.anchorOffsetX = page2pic2.width/2;
+        page2pic2.anchorOffsetY = page2pic2.height/2;
+        page2pic2.scaleX=0.3;
+        page2pic2.scaleY=0.3;
+
+        var page2pic3:egret.Bitmap=this.createBitmapByName("darksouls_jpg");
+        page2.addChild(page2pic3);
+        page2pic3.x=this.stage.stageWidth/2;
+        page2pic3.y=this.stage.stageHeight*3/5;
+        page2pic3.anchorOffsetX = page2pic3.width/2;
+        page2pic3.anchorOffsetY = page2pic3.height/2;
+        page2pic3.scaleX=0.8;
+        page2pic3.scaleY=0.8;
 
         var picmove:Function=function(){
             var pictw=egret.Tween.get(page2pic1);
@@ -357,7 +383,22 @@ class Main extends egret.DisplayObjectContainer {
             pictw.to({"rotation":-10},100);
             pictw.to({"rotation":0},100);
             pictw.wait(1500);
-            pictw.call(picmove,self);
+            //pictw.call(picmove,self);
+
+            var pictw2=egret.Tween.get(page2pic2);
+            pictw2.to({"rotation":10},100);
+            pictw2.to({"rotation":-10},100);
+            pictw2.to({"rotation":0},100);
+            pictw2.wait(1500);
+            //pictw2.call(picmove,self);
+
+            var pictw3=egret.Tween.get(page2pic3);
+            pictw3.to({"rotation":10},100);
+            pictw3.to({"rotation":-10},100);
+            pictw3.to({"rotation":0},100);
+            pictw3.wait(1500);
+            pictw3.call(picmove,self);
+
         }
         picmove();
 
@@ -441,6 +482,38 @@ class Main extends egret.DisplayObjectContainer {
         sky3.width = stageW;
         sky3.height = stageH;
 
+        var line8=new egret.Shape();
+        line8.graphics.lineStyle(10,0xffffff);
+        line8.graphics.moveTo(0,0);
+        line8.graphics.lineTo(20,-50);
+        line8.graphics.endFill();
+        line8.x = 40;
+        line8.y = stageH/2;
+        page3.addChild(line8);
+
+        var line9=new egret.Shape();
+        line9.graphics.lineStyle(10,0xffffff);
+        line9.graphics.moveTo(0,0);
+        line9.graphics.lineTo(20,50);
+        line9.graphics.endFill();
+        line9.x = 40;
+        line9.y = stageH/2;
+        page3.addChild(line9);
+
+        var change4:Function=function(){
+            var tw2 = egret.Tween.get(line8);
+            tw2.to({"alpha": 1}, 500);
+            tw2.wait(1500);
+            tw2.to({"alpha": 0}, 500);
+            tw2.call(change2, self);
+            var tw3 = egret.Tween.get(line9);
+            tw3.to({"alpha": 1}, 500);
+            tw3.wait(1500);
+            tw3.to({"alpha": 0}, 500);
+            tw3.call(change4, self);
+        }
+        change4();
+
         this.content2 = new egret.TextField();
         this.content2.text = "喜欢的电影和书籍"; 
         this.content2.textColor = 0x000000;
@@ -488,8 +561,8 @@ class Main extends egret.DisplayObjectContainer {
 
         var HungerGame:egret.Bitmap = this.createBitmapByName("2_jpg");
         page3.addChild(HungerGame);
-        HungerGame.scaleX = 0.5;
-        HungerGame.scaleY = 0.5;
+        HungerGame.scaleX = 0.4;
+        HungerGame.scaleY = 0.4;
         HungerGame.anchorOffsetX = HungerGame.width/2;
         HungerGame.anchorOffsetY = HungerGame.height/2;
         HungerGame.x = this.stage.stageWidth/2;
@@ -498,8 +571,8 @@ class Main extends egret.DisplayObjectContainer {
  
         var Daoshang:egret.Bitmap = this.createBitmapByName("3_jpg");
         page3.addChild(Daoshang);
-        Daoshang.scaleX = HungerGame.width/Daoshang.width*0.5;
-        Daoshang.scaleY = HungerGame.width/Daoshang.width*0.5;
+        Daoshang.scaleX = HungerGame.width/Daoshang.width*0.4;
+        Daoshang.scaleY = HungerGame.width/Daoshang.width*0.4;
         Daoshang.anchorOffsetX = Daoshang.width/2;
         Daoshang.anchorOffsetY = Daoshang.height/2;
         Daoshang.x = this.stage.stageWidth/2;
@@ -508,8 +581,8 @@ class Main extends egret.DisplayObjectContainer {
 
         var Shisi:egret.Bitmap = this.createBitmapByName("4_jpg");
         page3.addChild(Shisi);
-        Shisi.scaleX = HungerGame.width/Shisi.width*0.5;
-        Shisi.scaleY = HungerGame.width/Shisi.width*0.5;
+        Shisi.scaleX = HungerGame.width/Shisi.width*0.4;
+        Shisi.scaleY = HungerGame.width/Shisi.width*0.4;
         Shisi.anchorOffsetX = Shisi.width/2;
         Shisi.anchorOffsetY = Shisi.height/2;
         Shisi.x = this.stage.stageWidth/2;
